@@ -1,4 +1,97 @@
-#id {
+#App {
   width: 100%;
   height: 100%;
+}
+
+#App > .wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+#App > .wrapper .menu-button {
+  margin: 10px 0 0 20px;
+  position: absolute;
+  width: 36px;
+  height: 36px;
+}
+
+#App > .wrapper .main-title {
+  width: 100%;
+  padding: 0;
+  font-size: 48px;
+  display: flex;
+  justify-content: center;
+  color: rgba(139, 85, 27, 1);
+  margin: 20px 0 0 0;
+}
+
+#App > .wrapper .photo-area {
+  width: 960px;
+  height: 540px;
+  margin: 40px auto 0 auto;
+  display: grid;
+  grid-template-columns: repeat(16, 1fr); /* 1칸 60px */
+  grid-template-rows: repeat(9, 1fr); /* 1칸 60px */
+  gap: 10px;
+}
+
+#App > .wrapper .photo-area .first {
+  grid-column: 1 / span 7;
+  grid-row: 1 / span 7;
+  width: 100%;
+  height: 100%;
+}
+
+#App > .wrapper .photo-area .second {
+  grid-column: 8 / span 4;
+  grid-row: 1 / span 7;
+  background-color: red;
+  width: 100%;
+  height: 100%;
+}
+
+#App > .wrapper .photo-area .third {
+  grid-column: 12 / span 5;
+  grid-row: 1 / span 2;
+  background-color: orange;
+  width: 100%;
+  height: 100%;
+}
+
+#App > .wrapper .photo-area .fourth {
+  grid-column: 12 / span 5;
+  grid-row: 3 / span 7;
+  width: 100%;
+  height: 100%;
+}
+
+#App > .wrapper .photo-area .fifth {
+  grid-column: 1 / span 11;
+  grid-row: 8 / span 2;
+  background-color: orange;
+  width: 100%;
+  height: 100%;
+}
+
+#App > .contact-button {
+  width: 100px;
+  height: 84px;
+  display: flex;
+  align-items: end;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 0 40px 0 0;
+  position: absolute;
+  right: 20px;
+  bottom: 50px;
+}
+
+#App > .contact-button .contact-button-image {
+  width: 64px;
+  height: 64px;
+}
+
+#App > .contact-button .contact-button-text {
+  color: rgb(252, 98, 98);
+  font-weight: 500;
 }
