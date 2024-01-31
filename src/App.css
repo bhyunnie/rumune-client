@@ -5,14 +5,89 @@
 
 #App > .wrapper {
   width: 100%;
-  height: 100%;
+  height: 300vh;
+  padding: 20px 0 0 0;
+  box-sizing: border-box;
+  background-color: rgba(245, 218, 229, 1);
 }
 
-#App > .wrapper .menu-button {
+#App > .dimmed-area {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 1);
+  position: absolute;
+  transition: 0.1s ease opacity;
+  opacity: 0;
+  display: none;
+}
+
+#App > .dimmed-area.on {
+  opacity: 0.2;
+  display: block;
+}
+
+#App > .wrapper > .menu-button {
   margin: 10px 0 0 20px;
   position: absolute;
   width: 36px;
   height: 36px;
+  cursor: pointer;
+}
+
+#App > .wrapper .side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 25%;
+  height: 100%;
+  transition: transform 0.5s ease;
+  transform: translateX(-100%);
+  z-index: 10;
+  background-color: rgba(235, 235, 235, 1);
+}
+
+#App > .wrapper .side-menu > .menu-wrapper {
+  min-height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+#App > .wrapper .side-menu > .menu-wrapper .menu {
+  width: 100%;
+  height: 64px;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 40px;
+  cursor: pointer;
+  box-sizing: border-box;
+  color: rgba(139, 85, 27, 1);
+}
+
+#App > .wrapper .side-menu > .menu-wrapper .menu:hover {
+  color: blue;
+  background-color: red;
+}
+
+#App > .wrapper .side-menu.open {
+  transform: translate(0%);
+}
+
+#App > .wrapper .side-menu .menu-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  height: 56px;
+}
+
+#App > .wrapper .side-menu .menu-button-wrapper .menu-button {
+  margin: 10px 20px 0 0;
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
 }
 
 #App > .wrapper .main-title {
@@ -22,7 +97,6 @@
   display: flex;
   justify-content: center;
   color: rgba(139, 85, 27, 1);
-  margin: 20px 0 0 0;
 }
 
 #App > .wrapper .photo-area {
@@ -33,6 +107,12 @@
   grid-template-columns: repeat(16, 1fr); /* 1칸 60px */
   grid-template-rows: repeat(9, 1fr); /* 1칸 60px */
   gap: 10px;
+}
+
+#App > .wrapper .photo-area div:hover,
+#App > .wrapper .photo-area img:hover {
+  transform: scale(1.04);
+  transition: 0.3s transform ease;
 }
 
 #App > .wrapper .photo-area .first {
@@ -77,11 +157,11 @@
   width: 100px;
   height: 84px;
   display: flex;
-  align-items: end;
+  align-items: flex-end;
   flex-direction: column;
   box-sizing: border-box;
   padding: 0 40px 0 0;
-  position: absolute;
+  position: fixed;
   right: 20px;
   bottom: 50px;
 }
@@ -89,9 +169,34 @@
 #App > .contact-button .contact-button-image {
   width: 64px;
   height: 64px;
+  cursor: pointer;
+}
+
+#App > .contact-button .contact-button-image:hover {
+  animation: shake 0.5s ease-in-out;
 }
 
 #App > .contact-button .contact-button-text {
   color: rgb(252, 98, 98);
   font-weight: 500;
+}
+
+/* Animation */
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-3px);
+  }
+  100% {
+    transform: translateX(3px);
+  }
 }
