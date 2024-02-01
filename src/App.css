@@ -5,10 +5,10 @@
 
 #App > .wrapper {
   width: 100%;
-  height: 300vh;
+  height: 100%;
   padding: 20px 0 0 0;
   box-sizing: border-box;
-  background-color: rgba(245, 218, 229, 1);
+  background-color: rgba(255, 255, 255, 1);
 }
 
 #App > .dimmed-area {
@@ -68,8 +68,8 @@
 }
 
 #App > .wrapper .side-menu > .menu-wrapper .menu:hover {
-  color: blue;
-  background-color: red;
+  color: rgba(255, 255, 255, 1);
+  background-color: rgba(139, 85, 27, 1);
 }
 
 #App > .wrapper .side-menu.open {
@@ -100,13 +100,27 @@
 }
 
 #App > .wrapper .photo-area {
-  width: 960px;
-  height: 540px;
+  width: 80%;
+  height: 80%;
   margin: 40px auto 0 auto;
   display: grid;
   grid-template-columns: repeat(16, 1fr); /* 1칸 60px */
   grid-template-rows: repeat(9, 1fr); /* 1칸 60px */
   gap: 10px;
+}
+
+#App > .wrapper .magazine-photo-area {
+  width: 80%;
+  height: 80%;
+  margin: 40px auto 0 auto;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+
+#App > .wrapper .magazine-photo-area .magazine-photo {
+  width: 100%;
+  object-fit: cover;
 }
 
 #App > .wrapper .photo-area div:hover,
