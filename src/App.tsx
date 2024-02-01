@@ -4,6 +4,8 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Shop from "./pages/Shop";
 import Home from "./pages/Home";
+import ContactButton from "./components/ContactButton";
+import React from "react";
 
 function App() {
   return (
@@ -11,8 +13,16 @@ function App() {
       <div id="App">
         <Routes>
           <Route path="/shop" element={<Shop />}></Route>
-          <Route path="/" element={<Home />}></Route>
+          <Route
+            path="/"
+            element={
+              <React.Fragment>
+                <Home />
+              </React.Fragment>
+            }
+          ></Route>
         </Routes>
+        <ContactButton />
       </div>
     </BrowserRouter>
   );

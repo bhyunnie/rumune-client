@@ -3,7 +3,6 @@ import goodPicture from "../global/assets/images/good-picture.jpg";
 import japanCat from "../global/assets/images/japan-cat.jpg";
 import japanStreet from "../global/assets/images/japan-street.jpg";
 import menubutton from "../global/assets/icons/menu-button-black.svg";
-import strawberry_null from "../global/assets/images/strawberry-null.png";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -106,14 +105,6 @@ const Home = () => {
             alt=""
           ></img>
         </div>
-      </div>
-      <div className="contact-button">
-        <img
-          className="contact-button-image"
-          src={strawberry_null}
-          alt=""
-        ></img>
-        <span className="contact-button-text">방가방가</span>
       </div>
     </React.Fragment>
   );

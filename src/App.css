@@ -139,7 +139,6 @@
 #App > .wrapper .photo-area .second {
   grid-column: 8 / span 4;
   grid-row: 1 / span 7;
-  background-color: red;
   width: 100%;
   height: 100%;
 }
@@ -147,7 +146,6 @@
 #App > .wrapper .photo-area .third {
   grid-column: 12 / span 5;
   grid-row: 1 / span 2;
-  background-color: orange;
   width: 100%;
   height: 100%;
 }
@@ -162,14 +160,13 @@
 #App > .wrapper .photo-area .fifth {
   grid-column: 1 / span 11;
   grid-row: 8 / span 2;
-  background-color: orange;
   width: 100%;
   height: 100%;
 }
 
 #App > .contact-button {
   width: 100px;
-  height: 84px;
+  min-height: 84px;
   display: flex;
   align-items: flex-end;
   flex-direction: column;
@@ -178,6 +175,29 @@
   position: fixed;
   right: 20px;
   bottom: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+#App > .contact-button .contact-menu-wrapper {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease-out;
+}
+
+#App > .contact-button .contact-menu-wrapper.open {
+  max-height: 300px;
+}
+
+#App > .contact-button .contact-menu {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  margin: 15px 0 15px 0;
+}
+
+#App > .contact-button .contact-menu:hover {
+  color: rgba(139, 85, 27, 1);
 }
 
 #App > .contact-button .contact-button-image {
