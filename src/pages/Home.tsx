@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import goodPicture from "../global/assets/images/good-picture.jpg";
 import japanCat from "../global/assets/images/japan-cat.jpg";
 import japanStreet from "../global/assets/images/japan-street.jpg";
-import menubutton from "../global/assets/icons/menu-button-black.svg";
+import menuButton from "../global/assets/icons/menu-button-black.svg";
 import { Link } from "react-router-dom";
+import loginButton from "../global/assets/icons/login-button.svg";
+import "./Home.css";
 
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -55,38 +57,50 @@ const Home = () => {
         onClick={clickDimmedArea}
         ref={dimmedArea}
       ></div>
-      <div className="wrapper">
-        <div className="side-menu" ref={sideMenu}>
-          <div className="menu-button-wrapper">
-            <img
-              src={menubutton}
-              alt=""
-              onClick={() => {
-                setIsMenuOpen(!isMenuOpen);
-              }}
-              className="menu-button"
-            ></img>
+      <div id="home">
+        <div className="wrapper">
+          <div className="side-menu" ref={sideMenu}>
+            <div className="menu-button-wrapper">
+              <img
+                src={menuButton}
+                alt=""
+                onClick={() => {
+                  setIsMenuOpen(!isMenuOpen);
+                }}
+                className="menu-button"
+              ></img>
+            </div>
+            <ul className="menu-wrapper">
+              <li className="menu">
+                <Link className="link" to="/shop">
+                  🍒 전체상품
+                </Link>
+              </li>
+              <li className="menu">
+                <Link to="/shop?new">🐹 신상품</Link>
+              </li>
+              <li className="menu">🍄 인기상품</li>
+              <li className="menu">🍓 스티커</li>
+              <li className="menu">🍎 메모지</li>
+            </ul>
           </div>
-          <ul className="menu-wrapper">
-            <li className="menu">
-              <Link to="/shop">🐹 신상품</Link>
-            </li>
-            <li className="menu">🍄 인기상품</li>
-            <li className="menu">🍒 전체상품</li>
-            <li className="menu">🍓 스티커</li>
-            <li className="menu">🍎 메모지</li>
-          </ul>
-        </div>
-        <img
-          src={menubutton}
-          alt=""
-          onClick={() => {
-            setIsMenuOpen(!isMenuOpen);
-          }}
-          className="menu-button"
-        ></img>
-        <span className="main-title">ルムネ スタジオ</span>
-        {/* <div className="photo-area">
+          <img
+            src={menuButton}
+            alt=""
+            onClick={() => {
+              setIsMenuOpen(!isMenuOpen);
+            }}
+            className="menu-button"
+          ></img>
+          <div className="main-title-wrapper">
+            <span className="main-title">ルムネ スタジオ</span>
+            <span className="login-button">
+              <Link to="/login">
+                <img className="login-button-icon" src={loginButton} alt="" />
+              </Link>
+            </span>
+          </div>
+          {/* <div className="photo-area">
         <img src={omurice} alt="" className="first"></img>
         <div className="second"></div>
         <div className="third"></div>
@@ -98,12 +112,25 @@ const Home = () => {
         <div className="fifth"></div>
       </div> */}
 
-        <div className="magazine-photo-area">
-          <img
-            className="magazine-photo"
-            src={magazinePictureArray[magazinePicture]}
-            alt=""
-          ></img>
+          <div className="magazine-photo-area">
+            <img
+              className="magazine-photo"
+              src={magazinePictureArray[magazinePicture]}
+              alt=""
+            ></img>
+          </div>
+
+          <div className="category">
+            <ul className="category-list">
+              <li>전체 상품</li>
+              <li>시즌 상품</li>
+              <li>한정 상품</li>
+              <li>스티커</li>
+              <li>메모지</li>
+              <li>마스킹 테이프</li>
+              <li>키링</li>
+            </ul>
+          </div>
         </div>
       </div>
     </React.Fragment>
