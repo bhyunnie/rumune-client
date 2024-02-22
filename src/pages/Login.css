@@ -54,3 +54,33 @@
   width: 100%;
   height: 40%;
 }
+
+#login > .wrapper .oauth-login-wrapper {
+  width: 100%;
+  height: 64px;
+  margin: 20px 0 0 0;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+#login > .wrapper .oauth-login {
+  width: 48px;
+  height: 48px;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 1px solid #666;
+}
+
+#login > .wrapper .oauth-login a {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#login > .wrapper .oauth-login .oauth-login-button {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}

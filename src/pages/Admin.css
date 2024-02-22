@@ -1,0 +1,59 @@
+#admin {
+  width: 100%;
+  height: 100%;
+}
+
+#admin > .wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+#admin > .wrapper .side-menu {
+  width: 20%;
+  min-width: 400px;
+  height: 100%;
+  background-color: rgba(65, 65, 65, 1);
+}
+
+#admin > .wrapper .side-menu header {
+  font-size: 24px;
+  font-weight: 700;
+  background-color: rgba(35, 35, 35, 1);
+}
+
+#admin > .wrapper .side-menu .menu-wrapper {
+  width: 100%;
+  background-color: white;
+}
+
+#admin > .wrapper .side-menu .menu-wrapper .menu {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  background-color: rgba(65, 65, 65, 1);
+  color: white;
+  padding: 0 0 0 10px;
+  box-sizing: border-box;
+}
+
+#admin > .wrapper .side-menu .menu-wrapper .menu:hover {
+  background-color: rgba(35, 35, 35, 1);
+}
+
+#admin > .wrapper .side-menu .menu-wrapper .menu a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#admin > .wrapper .content {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(225, 225, 225, 1);
+}

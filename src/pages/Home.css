@@ -106,6 +106,10 @@
   margin: 0 10% 0 auto;
 }
 
+#home > .wrapper .user-profile-button-icon {
+  width: 32px;
+}
+
 #home > .wrapper .login-button-icon {
   width: 32px;
 }

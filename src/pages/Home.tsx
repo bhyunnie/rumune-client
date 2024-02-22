@@ -1,17 +1,24 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import goodPicture from "../global/assets/images/good-picture.jpg";
 import japanCat from "../global/assets/images/japan-cat.jpg";
 import japanStreet from "../global/assets/images/japan-street.jpg";
 import menuButton from "../global/assets/icons/menu-button-black.svg";
 import { Link } from "react-router-dom";
 import loginButton from "../global/assets/icons/login-button.svg";
+import profileIcon from "../global/assets/icons/user-profile-icon.svg";
+import adminIcon from "../global/assets/icons/admin-icon.svg";
 import "./Home.css";
+import { UserContext } from "../context/UserContext";
+import ContactButton from "../components/ContactButton";
 
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const sideMenu = useRef<HTMLDivElement>(null);
   const dimmedArea = useRef<HTMLDivElement>(null);
+
   let magazineInterval: NodeJS.Timer | undefined;
+  useEffect(() => {});
+  const userCtx = useContext(UserContext);
 
   const toggleMenu = () => {
     if (isMenuOpen) {
@@ -42,6 +49,15 @@ const Home = () => {
       removeInterval();
     };
   }, []);
+
+  useEffect(() => {
+    const a = userCtx.user.authorities?.find((e) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      return e.name === "ROLE_ADMIN";
+    });
+
+    console.log(a);
+  }, [userCtx]);
 
   const magazinePictureArray = [goodPicture, japanCat, japanStreet];
   const magazinePictureChangeInterval = 1000;
@@ -98,6 +114,30 @@ const Home = () => {
               <Link to="/login">
                 <img className="login-button-icon" src={loginButton} alt="" />
               </Link>
+              {!!userCtx.user?.email ? (
+                <Link to="/profile">
+                  <img
+                    className="user-profile-button-icon"
+                    src={profileIcon}
+                    alt=""
+                  />
+                </Link>
+              ) : (
+                ""
+              )}
+              {!!userCtx.user?.authorities?.find(
+                (auth) => auth.name === "ROLE_ADMIN"
+              ) ? (
+                <Link to="/admin/v1/dashboard">
+                  <img
+                    className="user-profile-button-icon"
+                    src={adminIcon}
+                    alt=""
+                  />
+                </Link>
+              ) : (
+                ""
+              )}
             </span>
           </div>
           {/* <div className="photo-area">
@@ -133,6 +173,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <ContactButton />
     </React.Fragment>
   );
 };
