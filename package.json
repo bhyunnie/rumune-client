@@ -14,7 +14,7 @@
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "axios": "^1.6.6",
-    "ckeditor5-custom-build": "file:./src/ckeditor5",
+    "ckeditor5-custom-build": "file:./ckeditor5",
     "d3": "^7.8.5",
     "react": "^18.2.0",
     "react-cookie": "^7.0.2",

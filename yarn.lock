@@ -1176,6 +1176,13 @@
   dependencies:
     ckeditor5 "41.1.0"
 
+"@ckeditor/ckeditor5-alignment@41.1.0":
+  version "41.1.0"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-alignment/-/ckeditor5-alignment-41.1.0.tgz#da74d54c08f9c921f2c2016deb1749295736ed30"
+  integrity sha512-uJGts0roqsOAlamn26KXCPlv+rNAgVTiBRSxCDgM6/J9CbqVa/VLJe8oOUXnBsWZ4WwYmgQ1Gtoq7CqIEkdmQA==
+  dependencies:
+    ckeditor5 "41.1.0"
+
 "@ckeditor/ckeditor5-autoformat@41.1.0":
   version "41.1.0"
   resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-autoformat/-/ckeditor5-autoformat-41.1.0.tgz#42ddb0caad3a16ed5a0125f75393e424c421cc8d"
@@ -3815,15 +3822,15 @@ cjs-module-lexer@^1.0.0:
   resolved "https://registry.npmjs.org/cjs-module-lexer/-/cjs-module-lexer-1.2.3.tgz"
   integrity sha512-0TNiGstbQmCFwt4akjjBg5pLRTSyj/PkWQ1ZoO2zntmg9yLqSRxwEa4iCfQLGjqhiqBfOJa7W/E8wfGrTDmlZQ==
 
-"ckeditor5-custom-build@file:./src/ckeditor5":
+"ckeditor5-custom-build@file:./ckeditor5":
   version "0.0.1"
   dependencies:
+    "@ckeditor/ckeditor5-alignment" "41.1.0"
     "@ckeditor/ckeditor5-basic-styles" "41.1.0"
     "@ckeditor/ckeditor5-block-quote" "41.1.0"
     "@ckeditor/ckeditor5-editor-classic" "41.1.0"
     "@ckeditor/ckeditor5-essentials" "41.1.0"
     "@ckeditor/ckeditor5-font" "41.1.0"
-    "@ckeditor/ckeditor5-heading" "41.1.0"
     "@ckeditor/ckeditor5-highlight" "41.1.0"
     "@ckeditor/ckeditor5-horizontal-line" "41.1.0"
     "@ckeditor/ckeditor5-image" "41.1.0"
