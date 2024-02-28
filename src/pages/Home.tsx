@@ -111,9 +111,14 @@ const Home = () => {
           <div className="main-title-wrapper">
             <span className="main-title">ルムネ スタジオ</span>
             <span className="login-button">
-              <Link to="/login">
-                <img className="login-button-icon" src={loginButton} alt="" />
-              </Link>
+              {!!userCtx.user?.email ? (
+                ""
+              ) : (
+                <Link to="/login">
+                  <img className="login-button-icon" src={loginButton} alt="" />
+                </Link>
+              )}
+
               {!!userCtx.user?.email ? (
                 <Link to="/profile">
                   <img

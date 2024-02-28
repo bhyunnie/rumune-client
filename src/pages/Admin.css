@@ -52,6 +52,7 @@
 
 #admin > .wrapper .content {
   width: 80%;
+  min-width: 1500px;
   height: 100%;
   display: flex;
   flex-direction: column;

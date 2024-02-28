@@ -3,14 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^41.1.0",
+    "@ckeditor/ckeditor5-react": "^6.2.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/d3-scale": "^4.0.8",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.75",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "axios": "^1.6.6",
+    "ckeditor5-custom-build": "file:./src/ckeditor5",
+    "d3": "^7.8.5",
     "react": "^18.2.0",
     "react-cookie": "^7.0.2",
     "react-dom": "^18.2.0",
@@ -46,5 +51,8 @@
   "main": "index.js",
   "repository": "https://github.com/bhyunnie/rumune-client.git",
   "author": "bhyunnie <dev.bhyunnie@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/d3": "^7.4.3"
+  }
 }

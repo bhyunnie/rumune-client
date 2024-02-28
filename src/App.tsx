@@ -13,6 +13,7 @@ import cookieUtil from "./global/utils/cookieUtil";
 import axios from "axios";
 import { UserContext } from "./context/UserContext";
 import Admin from "./pages/Admin";
+import Write from "./pages/write/Write";
 
 const App = () => {
   const userCtx = useContext(UserContext);
@@ -60,6 +61,7 @@ const App = () => {
             ></Route>
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/admin/v1/*" element={<Admin />}></Route>
+            <Route path="/write/*" element={<Write></Write>}></Route>
           </Routes>
         </div>
       </BrowserRouter>

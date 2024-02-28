@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import axiosUtil from "../../global/utils/axiosUtil";
 import "./AdminUser.css";
+import AdminUserChart from "../../components/AdminUserChart";
 
 type User = {
   userId: number;
@@ -15,28 +16,30 @@ type User = {
 const AdminUser = () => {
   const [userList, setUserList] = useState([]);
   useEffect(() => {
-    axios({
-      method: "GET",
-      url: `${process.env.REACT_APP_SERVER_URL}/api/v1/user/list`,
-      headers: {
-        Authorization: axiosUtil.getBearerToken(),
-      },
-    })
-      .then((data) => {
-        setUserList(data.data?.userList);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    getUserList();
   }, []);
 
-  useEffect(() => {
-    console.log(userList);
-  });
+  useEffect(() => {});
+
+  const getUserList = async () => {
+    try {
+      const response = await axios({
+        method: "GET",
+        url: `${process.env.REACT_APP_SERVER_URL}/api/v1/user/list`,
+        headers: {
+          Authorization: axiosUtil.getBearerToken(),
+        },
+      });
+      setUserList(response.data.userList);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <React.Fragment>
       <div id="admin-user">
-        <div>사용자 현황</div>
+        <AdminUserChart></AdminUserChart>
         <table className="user-table">
           <thead>
             <tr>

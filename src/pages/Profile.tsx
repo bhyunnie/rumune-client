@@ -8,7 +8,7 @@ const Profile = () => {
   return (
     <div className="">
       <div className="">{userCtx.user.provider}</div>
-      <img src={userCtx.user.profileImage} alt=""></img>
+      <img width="400" src={userCtx.user.profileImage} alt=""></img>
       <div className="">{userCtx.user.provider}</div>
       <div className="">{userCtx.user.providerId}</div>
       <div className="">{userCtx.user.userId}</div>
