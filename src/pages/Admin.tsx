@@ -4,6 +4,7 @@ import cookieUtil from "../global/utils/cookieUtil";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import "./Admin.css";
 import AdminUser from "./admin/AdminUser";
+import AdminGoods from "../components/admin/AdminGoods";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -66,7 +67,14 @@ const Admin = () => {
           <Routes>
             <Route path="/dashboard/*" element={<div>dashboard</div>}></Route>
             <Route path="/user" element={<AdminUser />}></Route>
-            <Route path="/goods/*" element={<div>dashboard</div>}></Route>
+            <Route
+              path="/goods/*"
+              element={
+                <div>
+                  <AdminGoods />
+                </div>
+              }
+            ></Route>
             <Route path="/statistics/*" element={<div>dashboard</div>}></Route>
             <Route path="/notice/*" element={<div>dashboard</div>}></Route>
             <Route path="/calculate/*" element={<div>dashboard</div>}></Route>

@@ -93,7 +93,7 @@
 #home > .wrapper .main-title {
   font-size: 48px;
   color: rgba(139, 85, 27, 1);
-  margin: 0 auto 0 auto;
+  margin: 16px auto 0 160px;
 }
 
 #home > .wrapper .login-button {
@@ -126,8 +126,8 @@
 
 #home > .wrapper .magazine-photo-area {
   width: 80%;
-  height: 80%;
-  margin: 40px auto 0 auto;
+  height: 68%;
+  margin: 13px auto 0 auto;
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
@@ -180,7 +180,8 @@
 }
 
 #home > .wrapper > .category {
-  margin: 20px 10% 0 10%;
+  margin: 32px 10% 0 10%;
+  padding: 0 0 0 18px;
 }
 
 #home > .wrapper > .category > .category-list {

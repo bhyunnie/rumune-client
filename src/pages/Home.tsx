@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import goodPicture from "../global/assets/images/good-picture.jpg";
-import japanCat from "../global/assets/images/japan-cat.jpg";
-import japanStreet from "../global/assets/images/japan-street.jpg";
+// import goodPicture from "../global/assets/images/good-picture.jpg";
+// import japanCat from "../global/assets/images/japan-cat.jpg";
+// import japanStreet from "../global/assets/images/japan-street.jpg";
 import menuButton from "../global/assets/icons/menu-button-black.svg";
 import { Link } from "react-router-dom";
 import loginButton from "../global/assets/icons/login-button.svg";
@@ -10,45 +10,46 @@ import adminIcon from "../global/assets/icons/admin-icon.svg";
 import "./Home.css";
 import { UserContext } from "../context/UserContext";
 import ContactButton from "../components/ContactButton";
+import exampleImage from "../global/assets/images/example.jpg";
 
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const sideMenu = useRef<HTMLDivElement>(null);
   const dimmedArea = useRef<HTMLDivElement>(null);
 
-  let magazineInterval: NodeJS.Timer | undefined;
+  // let magazineInterval: NodeJS.Timer | undefined;
   useEffect(() => {});
   const userCtx = useContext(UserContext);
 
-  const toggleMenu = () => {
-    if (isMenuOpen) {
-      sideMenu.current?.classList.add("open");
-      dimmedArea.current?.classList.add("on");
-    } else {
-      sideMenu.current?.classList.remove("open");
-      dimmedArea.current?.classList.remove("on");
-    }
-  };
+  // const toggleMenu = () => {
+  //   if (isMenuOpen) {
+  //     sideMenu.current?.classList.add("open");
+  //     dimmedArea.current?.classList.add("on");
+  //   } else {
+  //     sideMenu.current?.classList.remove("open");
+  //     dimmedArea.current?.classList.remove("on");
+  //   }
+  // };
 
-  const removeInterval = () => {
-    clearInterval(magazineInterval);
-    magazineInterval = undefined;
-  };
+  // const removeInterval = () => {
+  //   clearInterval(magazineInterval);
+  //   magazineInterval = undefined;
+  // };
 
   useEffect(() => {
-    toggleMenu();
+    // toggleMenu();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMenuOpen]);
 
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    magazineInterval = setInterval(() => {
-      setMagazinePicture((prev) => (prev + 1) % magazinePictureArray.length);
-    }, magazinePictureChangeInterval);
-    return () => {
-      removeInterval();
-    };
-  }, []);
+  // useEffect(() => {
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   magazineInterval = setInterval(() => {
+  //     setMagazinePicture((prev) => (prev + 1) % magazinePictureArray.length);
+  //   }, magazinePictureChangeInterval);
+  //   return () => {
+  //     removeInterval();
+  //   };
+  // }, []);
 
   useEffect(() => {
     const a = userCtx.user.authorities?.find((e) => {
@@ -59,9 +60,7 @@ const Home = () => {
     console.log(a);
   }, [userCtx]);
 
-  const magazinePictureArray = [goodPicture, japanCat, japanStreet];
-  const magazinePictureChangeInterval = 1000;
-  const [magazinePicture, setMagazinePicture] = useState(0);
+  // const magazinePictureArray = [goodPicture, japanCat, japanStreet];
 
   const clickDimmedArea = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -156,15 +155,6 @@ const Home = () => {
         ></img>
         <div className="fifth"></div>
       </div> */}
-
-          <div className="magazine-photo-area">
-            <img
-              className="magazine-photo"
-              src={magazinePictureArray[magazinePicture]}
-              alt=""
-            ></img>
-          </div>
-
           <div className="category">
             <ul className="category-list">
               <li>전체 상품</li>
@@ -175,6 +165,14 @@ const Home = () => {
               <li>마스킹 테이프</li>
               <li>키링</li>
             </ul>
+          </div>
+          <div className="magazine-photo-area">
+            <img
+              className="magazine-photo"
+              // src={magazinePictureArray[magazinePicture]}
+              src={exampleImage}
+              alt=""
+            ></img>
           </div>
         </div>
       </div>
