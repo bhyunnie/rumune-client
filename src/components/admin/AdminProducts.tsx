@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const AdminGoods = () => {
+const AdminProducts = () => {
   return (
     <React.Fragment>
       <div>
@@ -11,4 +11,4 @@ const AdminGoods = () => {
   );
 };
 
-export default AdminGoods;
+export default AdminProducts;

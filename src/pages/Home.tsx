@@ -1,8 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-// import goodPicture from "../global/assets/images/good-picture.jpg";
-// import japanCat from "../global/assets/images/japan-cat.jpg";
-// import japanStreet from "../global/assets/images/japan-street.jpg";
-import menuButton from "../global/assets/icons/menu-button-black.svg";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import loginButton from "../global/assets/icons/login-button.svg";
 import profileIcon from "../global/assets/icons/user-profile-icon.svg";
@@ -13,43 +9,8 @@ import ContactButton from "../components/ContactButton";
 import exampleImage from "../global/assets/images/example.jpg";
 
 const Home = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const sideMenu = useRef<HTMLDivElement>(null);
-  const dimmedArea = useRef<HTMLDivElement>(null);
-
-  // let magazineInterval: NodeJS.Timer | undefined;
   useEffect(() => {});
   const userCtx = useContext(UserContext);
-
-  // const toggleMenu = () => {
-  //   if (isMenuOpen) {
-  //     sideMenu.current?.classList.add("open");
-  //     dimmedArea.current?.classList.add("on");
-  //   } else {
-  //     sideMenu.current?.classList.remove("open");
-  //     dimmedArea.current?.classList.remove("on");
-  //   }
-  // };
-
-  // const removeInterval = () => {
-  //   clearInterval(magazineInterval);
-  //   magazineInterval = undefined;
-  // };
-
-  useEffect(() => {
-    // toggleMenu();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isMenuOpen]);
-
-  // useEffect(() => {
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   magazineInterval = setInterval(() => {
-  //     setMagazinePicture((prev) => (prev + 1) % magazinePictureArray.length);
-  //   }, magazinePictureChangeInterval);
-  //   return () => {
-  //     removeInterval();
-  //   };
-  // }, []);
 
   useEffect(() => {
     const a = userCtx.user.authorities?.find((e) => {
@@ -60,21 +21,11 @@ const Home = () => {
     console.log(a);
   }, [userCtx]);
 
-  // const magazinePictureArray = [goodPicture, japanCat, japanStreet];
-
-  const clickDimmedArea = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
   return (
     <React.Fragment>
-      <div
-        className="dimmed-area"
-        onClick={clickDimmedArea}
-        ref={dimmedArea}
-      ></div>
       <div id="home">
         <div className="wrapper">
-          <div className="side-menu" ref={sideMenu}>
+          {/* <div className="side-menu" ref={sideMenu}>
             <div className="menu-button-wrapper">
               <img
                 src={menuButton}
@@ -106,55 +57,50 @@ const Home = () => {
               setIsMenuOpen(!isMenuOpen);
             }}
             className="menu-button"
-          ></img>
+          ></img> */}
           <div className="main-title-wrapper">
             <span className="main-title">ルムネ スタジオ</span>
-            <span className="login-button">
-              {!!userCtx.user?.email ? (
-                ""
-              ) : (
-                <Link to="/login">
-                  <img className="login-button-icon" src={loginButton} alt="" />
-                </Link>
-              )}
+            <div className="button-wrapper">
+              <span className="login-button">
+                {!!userCtx.user?.email ? (
+                  ""
+                ) : (
+                  <Link to="/login">
+                    <img
+                      className="login-button-icon"
+                      src={loginButton}
+                      alt=""
+                    />
+                  </Link>
+                )}
 
-              {!!userCtx.user?.email ? (
-                <Link to="/profile">
-                  <img
-                    className="user-profile-button-icon"
-                    src={profileIcon}
-                    alt=""
-                  />
-                </Link>
-              ) : (
-                ""
-              )}
-              {!!userCtx.user?.authorities?.find(
-                (auth) => auth.name === "ROLE_ADMIN"
-              ) ? (
-                <Link to="/admin/v1/dashboard">
-                  <img
-                    className="user-profile-button-icon"
-                    src={adminIcon}
-                    alt=""
-                  />
-                </Link>
-              ) : (
-                ""
-              )}
-            </span>
+                {!!userCtx.user?.email ? (
+                  <Link to="/profile">
+                    <img
+                      className="user-profile-button-icon"
+                      src={profileIcon}
+                      alt=""
+                    />
+                  </Link>
+                ) : (
+                  ""
+                )}
+                {!!userCtx.user?.authorities?.find(
+                  (auth) => auth.name === "ROLE_ADMIN"
+                ) ? (
+                  <Link to="/admin/v1/dashboard">
+                    <img
+                      className="user-profile-button-icon"
+                      src={adminIcon}
+                      alt=""
+                    />
+                  </Link>
+                ) : (
+                  ""
+                )}
+              </span>
+            </div>
           </div>
-          {/* <div className="photo-area">
-        <img src={omurice} alt="" className="first"></img>
-        <div className="second"></div>
-        <div className="third"></div>
-        <img
-          src={strawberry_yellow}
-          alt=""
-          className="fourth"
-        ></img>
-        <div className="fifth"></div>
-      </div> */}
           <div className="category">
             <ul className="category-list">
               <li>전체 상품</li>

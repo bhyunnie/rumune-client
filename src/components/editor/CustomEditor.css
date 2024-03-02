@@ -1,5 +1,5 @@
 .ck-editor__editable {
-  min-height: 1000px;
+  min-height: 500px;
 }
 
 .ck.ck-toolbar.ck-toolbar_grouping > .ck-toolbar__items {
@@ -31,4 +31,20 @@
 
 .ck.ck-sticky-panel .ck-sticky-panel__content_sticky {
   box-shadow: none;
+}
+
+.ck-toolbar_grouping .custom-editor-submit-button {
+  width: 80px;
+  height: 40px;
+  background-color: black;
+  color: white;
+  font-size: 14px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ck-toolbar_grouping .custom-editor-submit-button:hover {
+  cursor: pointer;
 }

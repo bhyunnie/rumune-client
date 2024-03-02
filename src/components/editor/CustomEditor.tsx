@@ -3,10 +3,7 @@ import axios from "axios";
 import CustomBuildEditor from "ckeditor5-custom-build/build/ckeditor";
 import "./CustomEditor.css";
 
-const API_URL = "http://localhost:8080";
-const UPLOAD_ENDPOINT = "api/v1/file/upload";
-
-const CustomEditor = () => {
+const CustomEditor = (props: { setData: Function }) => {
   function uploadAdapter(loader: any) {
     return {
       upload: function () {
@@ -14,7 +11,6 @@ const CustomEditor = () => {
           const body = new FormData();
           loader.file.then((file: string | Blob) => {
             body.append("file", file);
-            console.log(`${API_URL}/${UPLOAD_ENDPOINT}`);
             axios({
               method: "POST",
               url: `${process.env.REACT_APP_SERVER_URL}/api/v1/file/upload`,
@@ -35,8 +31,8 @@ const CustomEditor = () => {
     };
   }
 
+  // arrow funciton 사용 시 에러
   function uploadPlugin(editor: any) {
-    console.log(editor);
     editor.plugins.get("FileRepository").createUploadAdapter = (
       loader: any
     ) => {
@@ -44,11 +40,30 @@ const CustomEditor = () => {
     };
   }
 
+  const SubmitButton = () => {
+    const button = document.createElement("button");
+    button.classList.add("custom-editor-submit-button");
+    button.innerText = "상품 등록";
+    return button;
+  };
+
+  const addSubmitButton = () => {
+    console.log(window.location.pathname);
+    if (window.location.pathname.includes("write")) {
+      const submitButton = SubmitButton();
+      document.querySelector(".ck-toolbar_grouping")?.appendChild(submitButton);
+    }
+  };
+
   return (
     <CKEditor
       config={{ extraPlugins: [uploadPlugin] }}
       editor={CustomBuildEditor}
       data="<p>게시글</p>"
+      onReady={addSubmitButton}
+      onChange={(event: any, editor: any) => {
+        props.setData(editor.getData());
+      }}
     ></CKEditor>
   );
 };
