@@ -57,9 +57,9 @@ const Write = () => {
   };
 
   const checkNull = (p: ProductInfo) => {
-    for (const key in object) {
-      if (Object.prototype.hasOwnProperty.call(object, key)) {
-        const element = object[key];
+    for (const key in p) {
+      if (Object.prototype.hasOwnProperty.call(p, key)) {
+        const element = p[key];
       }
     }
   };
