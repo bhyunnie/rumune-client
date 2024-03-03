@@ -3,7 +3,10 @@ import axios from "axios";
 import CustomBuildEditor from "ckeditor5-custom-build/build/ckeditor";
 import "./CustomEditor.css";
 
-const CustomEditor = (props: { setData: Function }) => {
+const CustomEditor = (props: {
+  setData: Function;
+  submitButtonClick: Function;
+}) => {
   function uploadAdapter(loader: any) {
     return {
       upload: function () {
@@ -44,11 +47,13 @@ const CustomEditor = (props: { setData: Function }) => {
     const button = document.createElement("button");
     button.classList.add("custom-editor-submit-button");
     button.innerText = "상품 등록";
+    button.addEventListener("click", () => {
+      props.submitButtonClick();
+    });
     return button;
   };
 
   const addSubmitButton = () => {
-    console.log(window.location.pathname);
     if (window.location.pathname.includes("write")) {
       const submitButton = SubmitButton();
       document.querySelector(".ck-toolbar_grouping")?.appendChild(submitButton);

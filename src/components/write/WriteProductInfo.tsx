@@ -31,9 +31,7 @@ const WriteProductInfo = (props: {
     });
   };
 
-  useEffect(() => {
-    console.log(productInfo);
-  });
+  useEffect(() => {});
 
   return (
     <React.Fragment>

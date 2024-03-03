@@ -31,7 +31,6 @@ const Write = () => {
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    console.log(data);
   });
 
   const submitPost = () => {
@@ -40,28 +39,45 @@ const Write = () => {
       body.append("file", thumbnailFile);
     }
 
-    body.append("name", productInfo.name);
-    body.append("price", productInfo.price);
-    body.append("discount", productInfo.discount);
-    body.append("name", productInfo.name);
-    body.append("name", productInfo.name);
+    console.log("발사");
+    checkNull(productInfo);
+    appendBody(body, productInfo);
+    requestApi(body);
+  };
 
+  const checkNull = (p: ProductInfo): boolean => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    for (const [_, value] of Object.entries(p)) {
+      if (value === null) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const appendBody = (body: FormData, productInfo: ProductInfo) => {
+    for (const [key, value] of Object.entries(productInfo)) {
+      body.append(key, value);
+    }
+    body.append("title", "hello world");
+    body.append("content", "content");
+  };
+
+  const requestApi = (body: FormData) => {
     axios({
       method: "POST",
-      url: `${process.env.REACT_APP_SERVER_URL}/api/v1/post/write`,
+      url: `${process.env.REACT_APP_SERVER_URL}/api/v1/product/post/write`,
       headers: {
         "Content-Type": "multipart/form-data",
       },
       data: body,
-    });
-  };
-
-  const checkNull = (p: ProductInfo) => {
-    for (const key in p) {
-      if (Object.prototype.hasOwnProperty.call(p, key)) {
-        const element = p[key];
-      }
-    }
+    })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -79,8 +95,10 @@ const Write = () => {
           setThumbnail={setThumbnail}
           setThumbnailFile={setThumbnailFile}
         />
-        <CustomEditor setData={setData}></CustomEditor>
-        <button onClick={submitPost}>상품 등록</button>
+        <CustomEditor
+          setData={setData}
+          submitButtonClick={submitPost}
+        ></CustomEditor>
       </div>
     </div>
   );
