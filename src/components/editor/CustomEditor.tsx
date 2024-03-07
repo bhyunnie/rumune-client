@@ -2,6 +2,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import axios from "axios";
 import CustomBuildEditor from "ckeditor5-custom-build/build/ckeditor";
 import "./CustomEditor.css";
+import axiosUtil from "../../global/utils/axiosUtil";
 
 const CustomEditor = (props: {
   setData: Function;
@@ -16,9 +17,10 @@ const CustomEditor = (props: {
             body.append("file", file);
             axios({
               method: "POST",
-              url: `${process.env.REACT_APP_SERVER_URL}/api/v1/file/upload`,
+              url: `${process.env.REACT_APP_SERVER_URL}/api/v1/file/upload/post`,
               headers: {
                 "Content-Type": "multipart/form-data",
+                Authorization: axiosUtil.getBearerToken(),
               },
               data: body,
             })

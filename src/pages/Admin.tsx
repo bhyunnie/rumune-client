@@ -4,7 +4,8 @@ import cookieUtil from "../global/utils/cookieUtil";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import "./Admin.css";
 import AdminUser from "./admin/AdminUser";
-import AdminProducts from "../components/admin/AdminProducts";
+import AdminCategory from "./admin/AdminCategory";
+import AdminProduct from "./admin/AdminProduct";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -61,23 +62,20 @@ const Admin = () => {
             <li className="menu">
               <Link to="/admin/v1/calculate">정산</Link>
             </li>
+            <li className="menu">
+              <Link to="/admin/v1/category">카테고리 관리</Link>
+            </li>
           </ul>
         </aside>
         <div className="content">
           <Routes>
             <Route path="/dashboard/*" element={<div>dashboard</div>}></Route>
             <Route path="/user" element={<AdminUser />}></Route>
-            <Route
-              path="/products/*"
-              element={
-                <div>
-                  <AdminProducts />
-                </div>
-              }
-            ></Route>
             <Route path="/statistics/*" element={<div>dashboard</div>}></Route>
             <Route path="/notice/*" element={<div>dashboard</div>}></Route>
             <Route path="/calculate/*" element={<div>dashboard</div>}></Route>
+            <Route path="/products/*" element={<AdminProduct />}></Route>
+            <Route path="/category/*" element={<AdminCategory />}></Route>
           </Routes>
         </div>
       </div>

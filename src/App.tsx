@@ -14,9 +14,11 @@ import axios from "axios";
 import { UserContext } from "./context/UserContext";
 import Admin from "./pages/Admin";
 import Write from "./pages/write/Write";
+import { ModalContext } from "./context/ModalContext";
 
 const App = () => {
   const userCtx = useContext(UserContext);
+  const modalCtx = useContext(ModalContext);
   useEffect(() => {
     setUserInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -51,6 +53,11 @@ const App = () => {
     <CookiesProvider>
       <BrowserRouter>
         <div id="App">
+          {modalCtx.modalList.length > 0 ? (
+            <div className="dimmed-area"></div>
+          ) : (
+            ""
+          )}
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/shop" element={<Shop />}></Route>
