@@ -39,8 +39,6 @@ const Write = () => {
     if (thumbnailFile) {
       body.append("file", thumbnailFile);
     }
-
-    console.log("발사");
     checkNull(productInfo);
     appendBody(body, productInfo);
     requestApi(body);

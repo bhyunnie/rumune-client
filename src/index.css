@@ -47,6 +47,10 @@ a:-webkit-any-link {
   text-decoration: none;
 }
 
+select option[value=""][disabled] {
+  display: none;
+}
+
 #rumune {
   width: 100%;
   height: 100%;

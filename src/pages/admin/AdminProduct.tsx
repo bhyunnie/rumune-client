@@ -1,10 +1,30 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axiosUtil from "../../global/utils/axiosUtil";
+import { ModalContext } from "../../context/ModalContext";
 import ProductRegistModal from "../../components/admin/product/ProductRegistModal";
+import ProductCard from "../../components/admin/product/ProductCard";
+import "./AdminProductList.css";
+import "./AdminProduct.css";
+
+export type Product = {
+  categories: any[];
+  createdAt: string;
+  id: number;
+  isDeleted: boolean;
+  isNew: boolean;
+  name: string;
+  new: boolean;
+  price: number;
+  productImage: any[];
+  quantityLimit: number;
+  updatedAt: string;
+};
 
 const AdminProduct = () => {
-  const [registModalOpen, setRegistModalOpen] = useState<boolean>(false);
+  const modalCtx = useContext(ModalContext);
+  const [productList, setProductList] = useState([]);
+
   useEffect(() => {
     axios({
       method: "GET",
@@ -15,31 +35,37 @@ const AdminProduct = () => {
     })
       .then((data) => {
         console.log(data);
+        setProductList(data.data.result);
       })
       .catch((e) => {
         console.log(e);
       });
   }, []);
 
-  const toggleProductRegistModal = () => {
-    console.log(registModalOpen);
-    setRegistModalOpen(!registModalOpen);
+  useEffect(() => {});
+
+  const openProductRegistModal = () => {
+    modalCtx.setModalList([
+      ...modalCtx.modalList,
+      <ProductRegistModal setProductList={setProductList} />,
+    ]);
   };
 
   return (
     <React.Fragment>
-      {registModalOpen ? (
-        <ProductRegistModal>
-          <div></div>
-        </ProductRegistModal>
-      ) : (
-        ""
-      )}
-      <div>
-        <div>상품관리</div>
-        <div>
-          <button onClick={toggleProductRegistModal}>상품 등록</button>
-        </div>
+      <div className="admin-page-title">🎁 상품관리</div>
+      <div className="admin-product-regist-button-wrapper">
+        <button
+          className="admin-product-regist-button"
+          onClick={openProductRegistModal}
+        >
+          상품 등록
+        </button>
+      </div>
+      <div className="admin-product-list">
+        {productList.map((e: Product, i) => {
+          return <ProductCard key={i} product={e} />;
+        })}
       </div>
     </React.Fragment>
   );

@@ -1,0 +1,9 @@
+.admin-product-list {
+  width: 95%;
+  margin: 0 auto 50px auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 10px 50px;
+}

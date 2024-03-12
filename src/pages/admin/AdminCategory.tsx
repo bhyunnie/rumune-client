@@ -13,7 +13,7 @@ const AdminCategory = () => {
   useEffect(() => {
     axios({
       method: "GET",
-      url: `${process.env.REACT_APP_SERVER_URL}/admin/api/v1/category`,
+      url: `${process.env.REACT_APP_SERVER_URL}/api/v1/category`,
       headers: {
         Authorization: axiosUtil.getBearerToken(),
       },

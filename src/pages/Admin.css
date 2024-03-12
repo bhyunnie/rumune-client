@@ -5,7 +5,7 @@
 
 #admin > .wrapper {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: row;
 }
@@ -13,7 +13,7 @@
 #admin > .wrapper .side-menu {
   width: 20%;
   min-width: 400px;
-  height: 100%;
+  min-height: 100%;
   background-color: rgba(65, 65, 65, 1);
 }
 
@@ -53,7 +53,7 @@
 #admin > .wrapper .content {
   width: 80%;
   min-width: 1500px;
-  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   background-color: rgba(225, 225, 225, 1);

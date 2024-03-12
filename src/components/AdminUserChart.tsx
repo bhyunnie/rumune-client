@@ -18,7 +18,7 @@ const AdminUserChart = () => {
     try {
       const response = await axios({
         method: "GET",
-        url: `${process.env.REACT_APP_SERVER_URL}/api/v1/admin/user/count?date=20240225`,
+        url: `${process.env.REACT_APP_SERVER_URL}/api/v1/admin/user/count?date=20240302`,
         headers: {
           Authorization: axiosUtil.getBearerToken(),
         },
@@ -27,7 +27,7 @@ const AdminUserChart = () => {
         response.data.responseData.map((e: UserCountChart) => {
           return {
             count: e.count,
-            time: `${e.time.substring(6, 8)}일${e.time.substring(8, 10)}시`,
+            time: `${e.time.substring(6, 8)}/${e.time.substring(8, 10)}`,
           };
         })
       );

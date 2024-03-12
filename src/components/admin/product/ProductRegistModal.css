@@ -1,0 +1,57 @@
+.product-regist-modal {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.product-regist-modal .left {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.product-regist-modal .left header {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 10px 0 5px 0;
+}
+
+.product-regist-modal .left .thumbnail {
+  width: 70%;
+  aspect-ratio: 1;
+  background-color: gray;
+}
+
+.product-regist-modal .left .thumbnail-image {
+  display: none;
+}
+
+.product-regist-modal .left .sub-image-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  width: 70%;
+  height: 40%;
+}
+.product-regist-modal .left .add-sub-image-button {
+  width: 70%;
+  margin: 0 0 5px 0;
+}
+.product-regist-modal .left .sub-image-wrapper .sub-image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.product-regist-modal .left .sub-image-wrapper .sub-image-input {
+  display: none;
+}
+
+.product-regist-modal .right {
+  width: 70%;
+  height: 100%;
+}
