@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import axiosUtil from "../../global/utils/axiosUtil";
+import { useNavigate } from "react-router-dom";
 
 type Category = {
   id: number;
@@ -10,33 +11,44 @@ type Category = {
 const AdminCategory = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [data, setData] = useState<string>("");
-  useEffect(() => {
-    axios({
-      method: "GET",
-      url: `${process.env.REACT_APP_SERVER_URL}/api/v1/category`,
-      headers: {
-        Authorization: axiosUtil.getBearerToken(),
-      },
-    })
-      .then((data) => {
-        setCategories(data.data.result);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
+  const navigate = useNavigate();
+  useEffect(() => {}, []);
   useEffect(() => {});
 
   const changeData = (event: any) => {
     setData(event.target.value);
   };
 
-  const addCategory = (categoryName: string) => {
+  const checkAuthority = async () => {
+    const bearerToken = await axiosUtil.getBearerToken();
+    if (bearerToken) {
+      axios({
+        method: "GET",
+        url: `${process.env.REACT_APP_SERVER_URL}/api/v1/admin/check/authority`,
+        headers: {
+          Authorization: bearerToken,
+        },
+      })
+        .then((data) => {
+          if (data.data.checked !== true) navigate("/");
+        })
+        .catch((e) => {
+          navigate("/");
+        });
+    } else {
+      navigate("/");
+    }
+  };
+
+  checkAuthority();
+
+  const addCategory = async (categoryName: string) => {
+    const bearerToken = await axiosUtil.getBearerToken();
     axios({
       method: "POST",
       url: `${process.env.REACT_APP_SERVER_URL}/admin/api/v1/category?categoryName=${categoryName}`,
       headers: {
-        Authorization: axiosUtil.getBearerToken(),
+        Authorization: bearerToken,
       },
     })
       .then((_) => {

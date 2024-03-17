@@ -7,31 +7,28 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 export interface ProductInfo {
-  name: string;
+  title: string;
   price: number | null;
   discount: number | null;
-  quantityLimit: number | null;
   deliveryFee: number | null;
 }
 
 const Write = () => {
   // TODO : step1이 끝나고 step2 필요
-  const [data, setData] = useState();
+  const [data, setData] = useState("");
   const [thumbnail, setThumbnail] = useState<
     String | ArrayBuffer | null | undefined
   >(null);
   const [thumbnailFile, setThumbnailFile] = useState<File | null>();
   const [productInfo, setProductInfo] = useState<ProductInfo>({
-    name: "",
+    title: "",
     price: null,
     discount: null,
-    quantityLimit: null,
     deliveryFee: null,
   });
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    console.log(data);
   });
 
   const submitPost = () => {
@@ -45,6 +42,10 @@ const Write = () => {
   };
 
   const checkNull = (p: ProductInfo): boolean => {
+    if (data === "") {
+      return false;
+    }
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     for (const [_, value] of Object.entries(p)) {
       if (value === null) {
@@ -58,8 +59,9 @@ const Write = () => {
     for (const [key, value] of Object.entries(productInfo)) {
       body.append(key, value);
     }
-    body.append("title", "hello world");
-    body.append("content", "content");
+    body.append("title", productInfo.title);
+    body.append("content", data);
+    body.append("domain", "PRODUCT_POST");
   };
 
   const requestApi = (body: FormData) => {

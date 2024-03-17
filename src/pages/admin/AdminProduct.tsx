@@ -6,41 +6,48 @@ import ProductRegistModal from "../../components/admin/product/ProductRegistModa
 import ProductCard from "../../components/admin/product/ProductCard";
 import "./AdminProductList.css";
 import "./AdminProduct.css";
+import { useNavigate } from "react-router-dom";
 
 export type Product = {
-  categories: any[];
-  createdAt: string;
   id: number;
-  isDeleted: boolean;
-  isNew: boolean;
   name: string;
-  new: boolean;
   price: number;
-  productImage: any[];
+  thumbnail: string;
+  image: string[];
+  categories: string[];
   quantityLimit: number;
-  updatedAt: string;
+  createdAt: string;
 };
 
 const AdminProduct = () => {
   const modalCtx = useContext(ModalContext);
   const [productList, setProductList] = useState([]);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    axios({
-      method: "GET",
-      url: `${process.env.REACT_APP_SERVER_URL}/admin/api/v1/product/all`,
-      headers: {
-        Authorization: axiosUtil.getBearerToken(),
-      },
-    })
-      .then((data) => {
-        console.log(data);
-        setProductList(data.data.result);
+  useEffect(() => {}, []);
+
+  const checkAuthority = async () => {
+    const bearerToken = await axiosUtil.getBearerToken();
+    if (bearerToken) {
+      axios({
+        method: "GET",
+        url: `${process.env.REACT_APP_SERVER_URL}/api/v1/admin/check/authority`,
+        headers: {
+          Authorization: bearerToken,
+        },
       })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
+        .then((data) => {
+          if (data.data.checked !== true) navigate("/");
+        })
+        .catch((e) => {
+          navigate("/");
+        });
+    } else {
+      navigate("/");
+    }
+  };
+
+  checkAuthority();
 
   useEffect(() => {});
 

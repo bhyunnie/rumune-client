@@ -20,7 +20,7 @@ const AdminUserChart = () => {
         method: "GET",
         url: `${process.env.REACT_APP_SERVER_URL}/api/v1/admin/user/count?date=20240302`,
         headers: {
-          Authorization: axiosUtil.getBearerToken(),
+          Authorization: await axiosUtil.getBearerToken(),
         },
       });
       setData(

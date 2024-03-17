@@ -34,6 +34,7 @@ const App = () => {
    */
   const setUserInfo = () => {
     const accessToken = cookieUtil.getCookie("access-token");
+    console.log(`log : ${accessToken}`);
     if (accessToken) {
       const bearerToken = accessToken ? `Bearer ${accessToken}` : null;
       axios({
@@ -44,6 +45,7 @@ const App = () => {
         },
       })
         .then((data) => {
+          console.log(data);
           userCtx.setUser(data.data.userList[0]);
         })
         .catch((error) => {

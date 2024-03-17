@@ -60,7 +60,7 @@ const ProductRegistModal = (props: { setProductList: Function }) => {
     getCategory();
   }, []);
 
-  const submitCreateProduct = () => {
+  const submitCreateProduct = async () => {
     const data = new FormData();
     if (thumbnail) data.append("files", thumbnail);
     imageArray.forEach((file) => {
@@ -70,11 +70,12 @@ const ProductRegistModal = (props: { setProductList: Function }) => {
       data.append(key, value.toString());
     }
 
+    const bearerToken = await axiosUtil.getBearerToken();
     axios({
       method: "POST",
       url: `${process.env.REACT_APP_SERVER_URL}/admin/api/v1/product`,
       headers: {
-        Authorization: axiosUtil.getBearerToken(),
+        Authorization: bearerToken,
         "Content-Type": "multipart/form-data",
       },
       data: data,

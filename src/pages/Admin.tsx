@@ -1,23 +1,20 @@
 import axios from "axios";
 import { useEffect } from "react";
-import cookieUtil from "../global/utils/cookieUtil";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import "./Admin.css";
 import AdminUser from "./admin/AdminUser";
 import AdminCategory from "./admin/AdminCategory";
 import AdminProduct from "./admin/AdminProduct";
+import axiosUtil from "../global/utils/axiosUtil";
 
 const Admin = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    checkAuthority();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const checkAuthority = () => {
-    const accessToken = cookieUtil.getCookie("access-token");
-    if (accessToken) {
-      const bearerToken = accessToken ? `Bearer ${accessToken}` : null;
+  const checkAuthority = async () => {
+    const bearerToken = await axiosUtil.getBearerToken();
+    if (bearerToken) {
       axios({
         method: "GET",
         url: `${process.env.REACT_APP_SERVER_URL}/api/v1/admin/check/authority`,
@@ -35,6 +32,9 @@ const Admin = () => {
       navigate("/");
     }
   };
+
+  checkAuthority();
+
   return (
     <div id="admin">
       <div className="wrapper">

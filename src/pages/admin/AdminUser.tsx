@@ -23,11 +23,12 @@ const AdminUser = () => {
 
   const getUserList = async () => {
     try {
+      const bearerToken = await axiosUtil.getBearerToken();
       const response = await axios({
         method: "GET",
         url: `${process.env.REACT_APP_SERVER_URL}/api/v1/user/list`,
         headers: {
-          Authorization: axiosUtil.getBearerToken(),
+          Authorization: bearerToken,
         },
       });
       setUserList(response.data.userList);

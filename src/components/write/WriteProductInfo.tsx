@@ -73,21 +73,11 @@ const WriteProductInfo = (props: {
             <section className="section-wrapper">
               <label>상품명</label>
               <input
-                name="name"
+                name="title"
                 type="text"
-                value={productInfo.name}
+                value={productInfo.title}
                 onChange={changeValue}
                 placeholder="상품명을 입력해주세요"
-              ></input>
-            </section>
-            <section className="section-wrapper">
-              <label>가격</label>
-              <input
-                name="price"
-                type="text"
-                value={productInfo.price || ""}
-                onChange={changeValue}
-                placeholder="가격을 입력해주세요"
               ></input>
             </section>
             <section className="section-wrapper">
@@ -101,16 +91,6 @@ const WriteProductInfo = (props: {
               ></input>
             </section>
             <section className="section-wrapper">
-              <label>제한개수</label>
-              <input
-                name="quantityLimit"
-                type="text"
-                value={productInfo.quantityLimit || ""}
-                onChange={changeValue}
-                placeholder="제한 개수를 선택해주세요"
-              ></input>
-            </section>
-            <section className="section-wrapper">
               <label>배송비</label>
               <input
                 name="deliveryFee"
@@ -121,15 +101,10 @@ const WriteProductInfo = (props: {
               ></input>
             </section>
             <section className="section-wrapper">
-              <label>카테고리</label>
-              <ul>
-                <li>카테고리 1</li>
-              </ul>
+              <label>상품</label>
+              <button>상품 추가</button>
             </section>
-            <section className="section-wrapper">
-              <label>옵션</label>
-              <button>옵션 추가</button>
-            </section>
+            <div>목록</div>
           </div>
         </div>
         <div className="button-wrapper"></div>

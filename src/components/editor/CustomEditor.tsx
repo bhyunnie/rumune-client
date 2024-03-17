@@ -13,14 +13,14 @@ const CustomEditor = (props: {
       upload: function () {
         return new Promise((resolve, reject) => {
           const body = new FormData();
-          loader.file.then((file: string | Blob) => {
+          loader.file.then(async (file: string | Blob) => {
             body.append("file", file);
             axios({
               method: "POST",
               url: `${process.env.REACT_APP_SERVER_URL}/api/v1/file/upload/post`,
               headers: {
                 "Content-Type": "multipart/form-data",
-                Authorization: axiosUtil.getBearerToken(),
+                Authorization: await axiosUtil.getBearerToken(),
               },
               data: body,
             })
