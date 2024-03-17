@@ -9,55 +9,13 @@ import ContactButton from "../components/ContactButton";
 import exampleImage from "../global/assets/images/example.jpg";
 
 const Home = () => {
-  useEffect(() => {});
   const userCtx = useContext(UserContext);
-
-  useEffect(() => {
-    const a = userCtx.user.authorities?.find((e) => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      return e.name === "ROLE_ADMIN";
-    });
-
-    console.log(a);
-  }, [userCtx]);
+  useEffect(() => {});
 
   return (
     <React.Fragment>
       <div id="home">
         <div className="wrapper">
-          {/* <div className="side-menu" ref={sideMenu}>
-            <div className="menu-button-wrapper">
-              <img
-                src={menuButton}
-                alt=""
-                onClick={() => {
-                  setIsMenuOpen(!isMenuOpen);
-                }}
-                className="menu-button"
-              ></img>
-            </div>
-            <ul className="menu-wrapper">
-              <li className="menu">
-                <Link className="link" to="/shop">
-                  🍒 전체상품
-                </Link>
-              </li>
-              <li className="menu">
-                <Link to="/shop?new">🐹 신상품</Link>
-              </li>
-              <li className="menu">🍄 인기상품</li>
-              <li className="menu">🍓 스티커</li>
-              <li className="menu">🍎 메모지</li>
-            </ul>
-          </div>
-          <img
-            src={menuButton}
-            alt=""
-            onClick={() => {
-              setIsMenuOpen(!isMenuOpen);
-            }}
-            className="menu-button"
-          ></img> */}
           <div className="main-title-wrapper">
             <span className="main-title">ルムネ スタジオ</span>
             <div className="button-wrapper">
@@ -113,12 +71,7 @@ const Home = () => {
             </ul>
           </div>
           <div className="magazine-photo-area">
-            <img
-              className="magazine-photo"
-              // src={magazinePictureArray[magazinePicture]}
-              src={exampleImage}
-              alt=""
-            ></img>
+            <img className="magazine-photo" src={exampleImage} alt=""></img>
           </div>
         </div>
       </div>
