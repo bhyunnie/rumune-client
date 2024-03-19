@@ -5,40 +5,49 @@ import WriteProductInfo from "../../components/write/WriteProductInfo";
 import strawBerry from "../../global/assets/images/strawberry-null.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import axiosUtil from "../../global/utils/axiosUtil";
 
 export interface ProductInfo {
   title: string;
-  price: number | null;
-  discount: number | null;
-  deliveryFee: number | null;
+  price: number;
+  discount: number;
+  deliveryFee: number;
 }
 
 const Write = () => {
-  // TODO : step1이 끝나고 step2 필요
   const [data, setData] = useState("");
-  const [thumbnail, setThumbnail] = useState<
-    String | ArrayBuffer | null | undefined
-  >(null);
-  const [thumbnailFile, setThumbnailFile] = useState<File | null>();
+  const [thumbnail, setThumbnail] = useState<File>();
+  const [selectedProductList, setSelectedProductList] = useState([]);
   const [productInfo, setProductInfo] = useState<ProductInfo>({
     title: "",
-    price: null,
-    discount: null,
-    deliveryFee: null,
+    price: 0,
+    discount: 0,
+    deliveryFee: 0,
   });
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    console.log(selectedProductList);
   });
 
   const submitPost = () => {
     const body = new FormData();
-    if (thumbnailFile) {
-      body.append("file", thumbnailFile);
+    if (thumbnail) {
+      if (!checkNull(productInfo)) return;
+      body.append("thumbnail", thumbnail);
+      body.append("title", productInfo.title);
+      body.append("content", data);
+      body.append("discount", productInfo.discount.toString());
+      body.append("deliveryFee", productInfo.deliveryFee.toString());
+      body.append("domain", "product_post");
+      selectedProductList.forEach((item: any) => {
+        body.append("productIdList", item.id.toString());
+        item.image.forEach((i: any) => {
+          body.append("postImageURLList", i);
+        });
+      });
+      requestApi(body);
     }
-    checkNull(productInfo);
-    appendBody(body, productInfo);
-    requestApi(body);
   };
 
   const checkNull = (p: ProductInfo): boolean => {
@@ -55,21 +64,13 @@ const Write = () => {
     return true;
   };
 
-  const appendBody = (body: FormData, productInfo: ProductInfo) => {
-    for (const [key, value] of Object.entries(productInfo)) {
-      body.append(key, value);
-    }
-    body.append("title", productInfo.title);
-    body.append("content", data);
-    body.append("domain", "PRODUCT_POST");
-  };
-
-  const requestApi = (body: FormData) => {
+  const requestApi = async (body: FormData) => {
     axios({
       method: "POST",
-      url: `${process.env.REACT_APP_SERVER_URL}/api/v1/product/post/write`,
+      url: `${process.env.REACT_APP_SERVER_URL}/admin/api/v1/post/product`,
       headers: {
         "Content-Type": "multipart/form-data",
+        Authorization: await axiosUtil.getBearerToken(),
       },
       data: body,
     })
@@ -94,12 +95,13 @@ const Write = () => {
           setProductInfo={setProductInfo}
           thumbnail={thumbnail}
           setThumbnail={setThumbnail}
-          setThumbnailFile={setThumbnailFile}
+          selectedProductList={selectedProductList}
+          setSelectedProductList={setSelectedProductList}
         />
-        <CustomEditor
-          setData={setData}
-          submitButtonClick={submitPost}
-        ></CustomEditor>
+        <CustomEditor setData={setData}></CustomEditor>
+        <button className="submit-button" onClick={submitPost}>
+          상품 등록
+        </button>
       </div>
     </div>
   );

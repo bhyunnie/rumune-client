@@ -70,12 +70,11 @@ const ProductRegistModal = (props: { setProductList: Function }) => {
       data.append(key, value.toString());
     }
 
-    const bearerToken = await axiosUtil.getBearerToken();
     axios({
       method: "POST",
       url: `${process.env.REACT_APP_SERVER_URL}/admin/api/v1/product`,
       headers: {
-        Authorization: bearerToken,
+        Authorization: await axiosUtil.getBearerToken(),
         "Content-Type": "multipart/form-data",
       },
       data: data,

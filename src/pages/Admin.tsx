@@ -10,31 +10,31 @@ import axiosUtil from "../global/utils/axiosUtil";
 const Admin = () => {
   const navigate = useNavigate();
   useEffect(() => {
+    const checkAuthority = async () => {
+      const bearerToken = await axiosUtil.getBearerToken();
+      if (bearerToken) {
+        axios({
+          method: "GET",
+          url: `${process.env.REACT_APP_SERVER_URL}/api/v1/admin/check/authority`,
+          headers: {
+            Authorization: bearerToken,
+          },
+        })
+          .then((data) => {
+            if (data.data.checked !== true) navigate("/");
+          })
+          .catch((e) => {
+            navigate("/");
+          });
+      } else {
+        navigate("/");
+      }
+    };
+
+    checkAuthority();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const checkAuthority = async () => {
-    const bearerToken = await axiosUtil.getBearerToken();
-    if (bearerToken) {
-      axios({
-        method: "GET",
-        url: `${process.env.REACT_APP_SERVER_URL}/api/v1/admin/check/authority`,
-        headers: {
-          Authorization: bearerToken,
-        },
-      })
-        .then((data) => {
-          if (data.data.checked !== true) navigate("/");
-        })
-        .catch((e) => {
-          navigate("/");
-        });
-    } else {
-      navigate("/");
-    }
-  };
-
-  checkAuthority();
-
   return (
     <div id="admin">
       <div className="wrapper">

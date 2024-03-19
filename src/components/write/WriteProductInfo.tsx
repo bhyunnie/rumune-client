@@ -1,21 +1,28 @@
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import "./WriteProductInfo.css";
 import { ProductInfo } from "../../pages/write/Write";
+import { ModalContext } from "../../context/ModalContext";
+import ProductListModal from "../admin/product/ProductListModal";
+import ProductList from "../admin/product/ProductList";
 
 const WriteProductInfo = (props: {
   productInfo: ProductInfo;
   setProductInfo: Function;
-  thumbnail: String | ArrayBuffer | null | undefined;
+  thumbnail: File | undefined;
   setThumbnail: Function;
-  setThumbnailFile: Function;
+  selectedProductList: any;
+  setSelectedProductList: Function;
 }) => {
   const {
     productInfo,
     setProductInfo,
     thumbnail,
     setThumbnail,
-    setThumbnailFile,
+    selectedProductList,
+    setSelectedProductList,
   } = props;
+
+  const modalCtx = useContext(ModalContext);
 
   const fileRef = useRef<HTMLInputElement>(null);
   const openFileBrowser = () => {
@@ -33,6 +40,19 @@ const WriteProductInfo = (props: {
 
   useEffect(() => {});
 
+  const openProductListModal = () => {
+    modalCtx.setModalList([
+      ...modalCtx.modalList,
+      <ProductListModal setSelectedProductList={setSelectedProductList} />,
+    ]);
+  };
+
+  const changeThumbnail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files.length === 0) return;
+    const files: FileList = e.target.files;
+    setThumbnail(files[0]);
+  };
+
   return (
     <React.Fragment>
       <div id="write-product-info">
@@ -42,7 +62,11 @@ const WriteProductInfo = (props: {
               {thumbnail ? (
                 <img
                   className="thumbnail"
-                  src={thumbnail as string}
+                  src={
+                    thumbnail
+                      ? URL.createObjectURL(thumbnail)
+                      : process.env.REACT_APP_DEFAULT_UPLOAD_IMAGE
+                  }
                   alt=""
                 ></img>
               ) : (
@@ -55,23 +79,12 @@ const WriteProductInfo = (props: {
               className="thumbnail-file"
               ref={fileRef}
               type="file"
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                const reader = new FileReader();
-                const files = event.target.files;
-                if (files && files[0]) {
-                  const file = files[0];
-                  setThumbnailFile(file);
-                  reader.onload = (e) => {
-                    setThumbnail(e.target?.result);
-                  };
-                  reader.readAsDataURL(file);
-                }
-              }}
+              onChange={changeThumbnail}
             ></input>
           </div>
           <div className="right">
             <section className="section-wrapper">
-              <label>상품명</label>
+              <label>글 제목</label>
               <input
                 name="title"
                 type="text"
@@ -100,11 +113,21 @@ const WriteProductInfo = (props: {
                 placeholder="배송비를 입력해주세요"
               ></input>
             </section>
-            <section className="section-wrapper">
-              <label>상품</label>
-              <button>상품 추가</button>
-            </section>
-            <div>목록</div>
+            <div className="section-wrapper">
+              🎁 상품 목록 {`(${selectedProductList.length} / 10)`}{" "}
+              <button onClick={openProductListModal}>상품 추가</button>
+            </div>
+            <div className="product-list-column">
+              <span className="thumbnail">썸네일</span>
+              <span className="name">상품명</span>
+              <span className="price">가격</span>
+              <span className="limit">제한개수</span>
+              <span className="stock">재고</span>
+            </div>
+            <ProductList
+              productList={selectedProductList}
+              setSelectedProductList={setSelectedProductList}
+            ></ProductList>
           </div>
         </div>
         <div className="button-wrapper"></div>

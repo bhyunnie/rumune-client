@@ -1,15 +1,37 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import loginButton from "../global/assets/icons/login-button.svg";
 import profileIcon from "../global/assets/icons/user-profile-icon.svg";
 import adminIcon from "../global/assets/icons/admin-icon.svg";
+import writeIcon from "../global/assets/icons/write-icon.svg";
 import "./Home.css";
 import { UserContext } from "../context/UserContext";
 import ContactButton from "../components/ContactButton";
 import exampleImage from "../global/assets/images/example.jpg";
+import axios from "axios";
+import axiosUtil from "../global/utils/axiosUtil";
 
 const Home = () => {
   const userCtx = useContext(UserContext);
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    const getCategoryList = async () => {
+      try {
+        const data = await axios({
+          url: `${process.env.REACT_APP_SERVER_URL}/api/v1/category`,
+          method: "GET",
+          headers: {
+            Authorization: await axiosUtil.getBearerToken(),
+          },
+        });
+        setCategories(data.data.result);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getCategoryList();
+  }, []);
   useEffect(() => {});
 
   return (
@@ -46,13 +68,22 @@ const Home = () => {
                 {!!userCtx.user?.authorities?.find(
                   (auth) => auth.name === "ROLE_ADMIN"
                 ) ? (
-                  <Link to="/admin/v1/dashboard">
-                    <img
-                      className="user-profile-button-icon"
-                      src={adminIcon}
-                      alt=""
-                    />
-                  </Link>
+                  <React.Fragment>
+                    <Link to="/admin/v1/dashboard">
+                      <img
+                        className="user-profile-button-icon"
+                        src={adminIcon}
+                        alt=""
+                      />
+                    </Link>
+                    <Link to="/write">
+                      <img
+                        className="user-profile-button-icon"
+                        src={writeIcon}
+                        alt=""
+                      />
+                    </Link>
+                  </React.Fragment>
                 ) : (
                   ""
                 )}
@@ -61,13 +92,22 @@ const Home = () => {
           </div>
           <div className="category">
             <ul className="category-list">
-              <li>전체 상품</li>
-              <li>시즌 상품</li>
-              <li>한정 상품</li>
-              <li>스티커</li>
-              <li>메모지</li>
-              <li>마스킹 테이프</li>
-              <li>키링</li>
+              <li>
+                <Link to="product/all">전체 상품</Link>
+              </li>
+              <li>
+                <Link to="product/season">시즌 상품</Link>
+              </li>
+              <li>
+                <Link to="product/limit">한정 상품</Link>
+              </li>
+              {categories.map((e: any, idx) => {
+                return (
+                  <li key={idx}>
+                    <Link to={`product/${e.englishName}`}>{e.name}</Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
           <div className="magazine-photo-area">

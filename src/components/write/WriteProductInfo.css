@@ -5,16 +5,17 @@
 
 #write-product-info .wrapper {
   width: 100%;
-  height: 500px;
+  min-height: 500px;
   background-color: white;
   border-radius: 5px;
   display: flex;
   flex-direction: row;
+  margin: 0 0 50px 0;
 }
 
 #write-product-info .wrapper > .left {
   width: 50%;
-  height: 100%;
+  height: 500px;
   display: flex;
   justify-content: center;
 }
@@ -54,10 +55,9 @@
 
 #write-product-info .wrapper > .right {
   width: 50%;
-  height: 100%;
+  height: 500px;
   display: flex;
   flex-direction: column;
-  padding: 20px 0 0 0;
 }
 
 #write-product-info .wrapper > .right > .section-wrapper {
@@ -83,6 +83,27 @@
   text-indent: 5px;
 }
 
+#write-product-info .wrapper > .right > .product-list-column {
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+  color: gray;
+}
+#write-product-info .wrapper > .right > .product-list-column .thumbnail {
+  width: 68px;
+}
+#write-product-info .wrapper > .right > .product-list-column .name {
+  width: 200px;
+}
+#write-product-info .wrapper > .right > .product-list-column .limit {
+  width: 100px;
+}
+#write-product-info .wrapper > .right > .product-list-column .price {
+  width: 100px;
+}
+#write-product-info .wrapper > .right > .product-list-column .stock {
+  width: 100px;
+}
 #write-product-info .wrapper > .right > .section-wrapper select,
 #write-product-info .wrapper > .right > .section-wrapper option {
   width: 250px;

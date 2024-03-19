@@ -6,7 +6,7 @@ import ProductRegistModal from "../../components/admin/product/ProductRegistModa
 import ProductCard from "../../components/admin/product/ProductCard";
 import "./AdminProductList.css";
 import "./AdminProduct.css";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export type Product = {
   id: number;
@@ -17,38 +17,47 @@ export type Product = {
   categories: string[];
   quantityLimit: number;
   createdAt: string;
+  stock: number;
 };
 
 const AdminProduct = () => {
   const modalCtx = useContext(ModalContext);
   const [productList, setProductList] = useState([]);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  useEffect(() => {}, []);
-
-  const checkAuthority = async () => {
-    const bearerToken = await axiosUtil.getBearerToken();
-    if (bearerToken) {
-      axios({
-        method: "GET",
-        url: `${process.env.REACT_APP_SERVER_URL}/api/v1/admin/check/authority`,
-        headers: {
-          Authorization: bearerToken,
-        },
-      })
-        .then((data) => {
-          if (data.data.checked !== true) navigate("/");
+  useEffect(() => {
+    const checkAuthority = async () => {
+      const bearerToken = await axiosUtil.getBearerToken();
+      if (bearerToken) {
+        axios({
+          method: "GET",
+          url: `${process.env.REACT_APP_SERVER_URL}/api/v1/admin/check/authority`,
+          headers: {
+            Authorization: bearerToken,
+          },
         })
-        .catch((e) => {
-          navigate("/");
-        });
-    } else {
-      navigate("/");
-    }
-  };
+          .then(async (data) => {
+            if (data.data.checked !== true) window.location.replace("/");
+            axios({
+              method: "GET",
+              url: `${process.env.REACT_APP_SERVER_URL}/admin/api/v1/product/all`,
+              headers: {
+                Authorization: await axiosUtil.getBearerToken(),
+              },
+            }).then((data: any) => {
+              setProductList(data.data.result);
+            });
+          })
+          .catch((e) => {
+            window.location.replace("/");
+          });
+      } else {
+        window.location.replace("/");
+      }
+    };
 
-  checkAuthority();
-
+    checkAuthority();
+  }, []);
   useEffect(() => {});
 
   const openProductRegistModal = () => {
@@ -57,6 +66,8 @@ const AdminProduct = () => {
       <ProductRegistModal setProductList={setProductList} />,
     ]);
   };
+
+  const productCardClick = () => {};
 
   return (
     <React.Fragment>
@@ -71,7 +82,13 @@ const AdminProduct = () => {
       </div>
       <div className="admin-product-list">
         {productList.map((e: Product, i) => {
-          return <ProductCard key={i} product={e} />;
+          return (
+            <ProductCard
+              key={i}
+              product={e}
+              productCardClick={productCardClick}
+            />
+          );
         })}
       </div>
     </React.Fragment>

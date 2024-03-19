@@ -12,20 +12,19 @@ const axiosUtil = {
     if (accessToken) {
       return `Bearer ${accessToken}`;
     } else if (refreshToken) {
-      await axios({
-        method: "GET",
-        url: `${process.env.REACT_APP_SERVER_URL}/api/v1/jwt/refresh`,
-        headers: {
-          Authorization: `${refreshToken}`,
-        },
-        withCredentials: true,
-      })
-        .then(() => {
-          return cookieUtil.getCookie("access-token");
-        })
-        .catch(() => {
-          return undefined;
+      try {
+        await axios({
+          method: "GET",
+          url: `${process.env.REACT_APP_SERVER_URL}/api/v1/jwt/refresh`,
+          headers: {
+            Authorization: `${refreshToken}`,
+          },
+          withCredentials: true,
         });
+        return `Bearer ${cookieUtil.getCookie("access-token")}`;
+      } catch (error) {
+        return undefined;
+      }
     } else {
       return undefined;
     }

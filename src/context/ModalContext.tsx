@@ -25,6 +25,12 @@ export const ModalContextProvider: React.FC<Props> = ({
   };
 
   useEffect(() => {
+    const app: any = document.querySelector("#App");
+    if (modalList.length > 0) {
+      app.style.overflow = "hidden";
+    } else {
+      app.style.overflow = "auto";
+    }
     const handleKeyDown = (event: any) => {
       if (event.key === "Escape") {
         onClose();

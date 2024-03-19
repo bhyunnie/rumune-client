@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 type Props = {
   children?: JSX.Element | JSX.Element[];
 };
@@ -29,6 +29,7 @@ export const UserContextProvider: React.FC<Props> = ({
   children,
 }: Props): JSX.Element => {
   const [user, setUser] = useState({});
+  useEffect(() => {});
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {children}

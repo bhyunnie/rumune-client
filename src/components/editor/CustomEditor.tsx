@@ -4,10 +4,7 @@ import CustomBuildEditor from "ckeditor5-custom-build/build/ckeditor";
 import "./CustomEditor.css";
 import axiosUtil from "../../global/utils/axiosUtil";
 
-const CustomEditor = (props: {
-  setData: Function;
-  submitButtonClick: Function;
-}) => {
+const CustomEditor = (props: { setData: Function }) => {
   function uploadAdapter(loader: any) {
     return {
       upload: function () {
@@ -15,9 +12,10 @@ const CustomEditor = (props: {
           const body = new FormData();
           loader.file.then(async (file: string | Blob) => {
             body.append("file", file);
+            body.append("domain", "PRODUCT_POST");
             axios({
               method: "POST",
-              url: `${process.env.REACT_APP_SERVER_URL}/api/v1/file/upload/post`,
+              url: `${process.env.REACT_APP_SERVER_URL}/admin/api/v1/image/upload`,
               headers: {
                 "Content-Type": "multipart/form-data",
                 Authorization: await axiosUtil.getBearerToken(),
@@ -25,7 +23,7 @@ const CustomEditor = (props: {
               data: body,
             })
               .then((data) => {
-                resolve({ default: data.data.url });
+                resolve({ default: data.data.result[0].fileURL });
               })
               .catch((e) => {
                 reject(e);
@@ -45,29 +43,11 @@ const CustomEditor = (props: {
     };
   }
 
-  const SubmitButton = () => {
-    const button = document.createElement("button");
-    button.classList.add("custom-editor-submit-button");
-    button.innerText = "상품 등록";
-    button.addEventListener("click", () => {
-      props.submitButtonClick();
-    });
-    return button;
-  };
-
-  const addSubmitButton = () => {
-    if (window.location.pathname.includes("write")) {
-      const submitButton = SubmitButton();
-      document.querySelector(".ck-toolbar_grouping")?.appendChild(submitButton);
-    }
-  };
-
   return (
     <CKEditor
       config={{ extraPlugins: [uploadPlugin] }}
       editor={CustomBuildEditor}
       data="<p>게시글</p>"
-      onReady={addSubmitButton}
       onChange={(event: any, editor: any) => {
         props.setData(editor.getData());
       }}
