@@ -9,7 +9,6 @@ import { CookiesProvider } from "react-cookie";
 import Profile from "./pages/Profile";
 import LoginFailure from "./pages/LoginFailure";
 import React, { useContext, useEffect } from "react";
-import cookieUtil from "./global/utils/cookieUtil";
 import axios from "axios";
 import { UserContext } from "./context/UserContext";
 import Admin from "./pages/Admin";
@@ -17,26 +16,16 @@ import Write from "./pages/write/Write";
 import { CSSTransition } from "react-transition-group";
 import "./transition/Fade.css";
 import { ModalContext } from "./context/ModalContext";
+import axiosUtil from "./global/utils/axiosUtil";
+import ProductPost from "./pages/product/ProductPost";
 
 const App = () => {
   const userCtx = useContext(UserContext);
   const modalCtx = useContext(ModalContext);
 
   useEffect(() => {
-    setUserInfo();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {});
-
-  /**
-   * @description 로그인 유지를 위한 유저 정보 초기 설정 ( access-token 기반으로 userContext 정보 갱신 )
-   */
-  const setUserInfo = () => {
-    const accessToken = cookieUtil.getCookie("access-token");
-    console.log(`log : ${accessToken}`);
-    if (accessToken) {
-      const bearerToken = accessToken ? `Bearer ${accessToken}` : null;
+    const setUserInfo = async () => {
+      const bearerToken = await axiosUtil.getBearerToken();
       axios({
         method: "GET",
         url: `${process.env.REACT_APP_SERVER_URL}/api/v1/user/me`,
@@ -45,16 +34,18 @@ const App = () => {
         },
       })
         .then((data) => {
-          console.log(data);
           userCtx.setUser(data.data.userList[0]);
         })
         .catch((error) => {
-          console.log(error);
+          userCtx.setUser({});
         });
-    } else {
-      userCtx.setUser({});
-    }
-  };
+    };
+
+    setUserInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {});
 
   return (
     <CookiesProvider>
@@ -87,6 +78,7 @@ const App = () => {
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/admin/v1/*" element={<Admin />}></Route>
             <Route path="/write/*" element={<Write></Write>}></Route>
+            <Route path="/product/*" element={<ProductPost />}></Route>
           </Routes>
         </div>
       </BrowserRouter>
