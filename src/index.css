@@ -10,13 +10,31 @@
   src: url("./global/assets/fonts/NotoSans-Regular.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "GmarketSans";
+  font-weight: lighter;
+  src: url("./global/assets/fonts/GmarketSansTTFLight.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "GmarketSans";
+  font-weight: normal;
+  src: url("./global/assets/fonts/GmarketSansTTFMedium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "GmarketSans";
+  font-weight: bold;
+  src: url("./global/assets/fonts/GmarketSansTTFBold.ttf") format("truetype");
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  font-family: "NotoSansKR-Regular", "NotoSans-Regular";
+  font-family: "GmarketSans", "NotoSansKR-Regular", "NotoSans-Regular";
 }
 
 button {
