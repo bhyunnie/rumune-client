@@ -1,0 +1,23 @@
+.product-post-list {
+  display: grid;
+  width: 100%;
+  min-height: 100%;
+  padding: 20px 50px;
+  box-sizing: border-box;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 300px;
+  gap: 20px;
+}
+
+.product-post-list .product-post-card {
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.product-post-list .product-post-card .product-post-thumbnail {
+  width: 100%;
+  height: 50%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}

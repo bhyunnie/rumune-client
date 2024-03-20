@@ -17,7 +17,8 @@ import { CSSTransition } from "react-transition-group";
 import "./transition/Fade.css";
 import { ModalContext } from "./context/ModalContext";
 import axiosUtil from "./global/utils/axiosUtil";
-import ProductPost from "./pages/product/ProductPost";
+import ProductPostList from "./pages/product/ProductPostList";
+import ProductPostDetail from "./pages/product/ProductPostDetail";
 
 const App = () => {
   const userCtx = useContext(UserContext);
@@ -78,7 +79,8 @@ const App = () => {
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/admin/v1/*" element={<Admin />}></Route>
             <Route path="/write/*" element={<Write></Write>}></Route>
-            <Route path="/product/*" element={<ProductPost />}></Route>
+            <Route path="/product/all" element={<ProductPostList />}></Route>
+            <Route path="/product/*" element={<ProductPostDetail />}></Route>
           </Routes>
         </div>
       </BrowserRouter>

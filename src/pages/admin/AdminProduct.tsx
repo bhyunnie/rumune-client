@@ -23,7 +23,6 @@ export type Product = {
 const AdminProduct = () => {
   const modalCtx = useContext(ModalContext);
   const [productList, setProductList] = useState([]);
-  // const navigate = useNavigate();
 
   useEffect(() => {
     const checkAuthority = async () => {
