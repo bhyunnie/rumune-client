@@ -61,3 +61,13 @@
 .ck-powered-by-balloon {
   display: none !important;
 }
+
+#write > .wrapper .write-product-post-title {
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 30px;
+  width: 100%;
+  height: 48px;
+  text-indent: 10px;
+  padding: 0 0 20px 0;
+}

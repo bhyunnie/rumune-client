@@ -84,16 +84,6 @@ const WriteProductInfo = (props: {
           </div>
           <div className="right">
             <section className="section-wrapper">
-              <label>글 제목</label>
-              <input
-                name="title"
-                type="text"
-                value={productInfo.title}
-                onChange={changeValue}
-                placeholder="상품명을 입력해주세요"
-              ></input>
-            </section>
-            <section className="section-wrapper">
               <label>할인율</label>
               <input
                 name="discount"

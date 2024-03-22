@@ -27,7 +27,7 @@ const Write = () => {
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    console.log(selectedProductList);
+    console.log(productInfo);
   });
 
   const submitPost = () => {
@@ -82,6 +82,15 @@ const Write = () => {
       });
   };
 
+  const changeValue = (e: any) => {
+    setProductInfo((prev: ProductInfo) => {
+      return {
+        ...prev,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
+
   return (
     <div id="write">
       <div className="header">
@@ -90,6 +99,14 @@ const Write = () => {
         </Link>
       </div>
       <div className="wrapper">
+        <input
+          className="write-product-post-title"
+          type="text"
+          name="title"
+          value={productInfo.title}
+          onChange={changeValue}
+          placeholder="제목을 입력하세요"
+        ></input>
         <WriteProductInfo
           productInfo={productInfo}
           setProductInfo={setProductInfo}

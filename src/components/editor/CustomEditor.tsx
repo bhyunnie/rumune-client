@@ -47,7 +47,7 @@ const CustomEditor = (props: { setData: Function }) => {
     <CKEditor
       config={{ extraPlugins: [uploadPlugin] }}
       editor={CustomBuildEditor}
-      data="<p>게시글</p>"
+      data=""
       onChange={(event: any, editor: any) => {
         props.setData(editor.getData());
       }}

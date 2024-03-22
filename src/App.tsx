@@ -26,22 +26,22 @@ const App = () => {
 
   useEffect(() => {
     const setUserInfo = async () => {
-      const bearerToken = await axiosUtil.getBearerToken();
-      axios({
-        method: "GET",
-        url: `${process.env.REACT_APP_SERVER_URL}/api/v1/user/me`,
-        headers: {
-          Authorization: bearerToken,
-        },
-      })
-        .then((data) => {
-          userCtx.setUser(data.data.userList[0]);
-        })
-        .catch((error) => {
-          userCtx.setUser({});
+      try {
+        const bearerToken = await axiosUtil.getBearerToken();
+        if (bearerToken === "") return;
+        const response = await axios({
+          method: "GET",
+          url: `${process.env.REACT_APP_SERVER_URL}/api/v1/user/me`,
+          headers: {
+            Authorization: bearerToken,
+          },
         });
+        console.log(response);
+        userCtx.setUser(response?.data?.userList[0]);
+      } catch (error) {
+        userCtx.setUser({});
+      }
     };
-
     setUserInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -80,7 +80,10 @@ const App = () => {
             <Route path="/admin/v1/*" element={<Admin />}></Route>
             <Route path="/write/*" element={<Write></Write>}></Route>
             <Route path="/product/all" element={<ProductPostList />}></Route>
-            <Route path="/product/*" element={<ProductPostDetail />}></Route>
+            <Route
+              path="/product/detail/*"
+              element={<ProductPostDetail />}
+            ></Route>
           </Routes>
         </div>
       </BrowserRouter>

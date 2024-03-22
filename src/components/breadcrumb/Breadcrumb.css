@@ -1,0 +1,18 @@
+#bread-crumb {
+  width: 200px;
+  height: 40px;
+}
+
+#breadcrumb .crumb {
+  color: gray;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+#breadcrumb .crumb:hover {
+  color: black;
+}
+
+#breadcrumb .crumb:last-child {
+  color: black;
+}

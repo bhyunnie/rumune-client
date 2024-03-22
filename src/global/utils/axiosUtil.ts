@@ -21,8 +21,10 @@ const axiosUtil = {
           },
           withCredentials: true,
         });
+
         return `Bearer ${cookieUtil.getCookie("access-token")}`;
       } catch (error) {
+        console.log("여기냐");
         return undefined;
       }
     } else {

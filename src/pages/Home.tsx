@@ -9,7 +9,6 @@ import { UserContext } from "../context/UserContext";
 import ContactButton from "../components/ContactButton";
 import exampleImage from "../global/assets/images/example.jpg";
 import axios from "axios";
-import axiosUtil from "../global/utils/axiosUtil";
 
 const Home = () => {
   const userCtx = useContext(UserContext);
@@ -20,9 +19,6 @@ const Home = () => {
         const data = await axios({
           url: `${process.env.REACT_APP_SERVER_URL}/api/v1/category`,
           method: "GET",
-          headers: {
-            Authorization: await axiosUtil.getBearerToken(),
-          },
         });
         setCategories(data.data.result);
       } catch (error) {

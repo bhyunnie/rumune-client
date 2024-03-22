@@ -8,8 +8,8 @@ const ProductPostList = () => {
   const [productList, setProductList] = useState([]);
 
   useEffect(() => {
-    try {
-      const getProduct = async () => {
+    const getProduct = async () => {
+      try {
         const data = await axios({
           method: "GET",
           url: `${process.env.REACT_APP_SERVER_URL}/api/v1/post/product`,
@@ -18,10 +18,9 @@ const ProductPostList = () => {
           },
         });
         setProductList(data.data.result || []);
-      };
-
-      getProduct();
-    } catch (error) {}
+      } catch (error) {}
+    };
+    getProduct();
   }, []);
 
   return (
@@ -29,7 +28,7 @@ const ProductPostList = () => {
       {productList.map((e: any, idx) => {
         return (
           <React.Fragment key={idx}>
-            <Link to={`/product/${e.uuid}`}>
+            <Link to={`/product/detail/${e.uuid}`}>
               <div className="product-post-card">
                 <img
                   className="product-post-thumbnail"
