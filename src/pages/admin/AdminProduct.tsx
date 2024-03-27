@@ -39,7 +39,7 @@ const AdminProduct = () => {
             if (data.data.checked !== true) window.location.replace("/");
             axios({
               method: "GET",
-              url: `${process.env.REACT_APP_SERVER_URL}/admin/api/v1/product/all`,
+              url: `${process.env.REACT_APP_SERVER_URL}/api/v1/product/all`,
               headers: {
                 Authorization: await axiosUtil.getBearerToken(),
               },

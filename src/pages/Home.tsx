@@ -4,6 +4,7 @@ import loginButton from "../global/assets/icons/login-button.svg";
 import profileIcon from "../global/assets/icons/user-profile-icon.svg";
 import adminIcon from "../global/assets/icons/admin-icon.svg";
 import writeIcon from "../global/assets/icons/write-icon.svg";
+import cartIcon from "../global/assets/icons/cart-icon.svg";
 import "./Home.css";
 import { UserContext } from "../context/UserContext";
 import ContactButton from "../components/ContactButton";
@@ -51,13 +52,14 @@ const Home = () => {
                 )}
 
                 {!!userCtx.user?.email ? (
-                  <Link to="/profile">
-                    <img
-                      className="user-profile-button-icon"
-                      src={profileIcon}
-                      alt=""
-                    />
-                  </Link>
+                  <React.Fragment>
+                    <Link to="/profile">
+                      <img src={profileIcon} alt="" />
+                    </Link>
+                    <Link to="/cart">
+                      <img src={cartIcon} alt=""></img>
+                    </Link>
+                  </React.Fragment>
                 ) : (
                   ""
                 )}
@@ -66,11 +68,7 @@ const Home = () => {
                 ) ? (
                   <React.Fragment>
                     <Link to="/admin/v1/dashboard">
-                      <img
-                        className="user-profile-button-icon"
-                        src={adminIcon}
-                        alt=""
-                      />
+                      <img src={adminIcon} alt="" />
                     </Link>
                     <Link to="/write">
                       <img

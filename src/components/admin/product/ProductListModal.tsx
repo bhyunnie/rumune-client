@@ -14,7 +14,7 @@ const ProductListModal = (props: { setSelectedProductList: Function }) => {
 
   const getProductList = async () => {
     axios({
-      url: `${process.env.REACT_APP_SERVER_URL}/admin/api/v1/product/all`,
+      url: `${process.env.REACT_APP_SERVER_URL}/api/v1/product/all`,
       method: "GET",
       headers: {
         Authorization: await axiosUtil.getBearerToken(),

@@ -4,6 +4,7 @@ import axiosUtil from "../global/utils/axiosUtil";
 import axios from "axios";
 import StandardChart from "./StandardChart";
 import { UserCountChart } from "../global/utils/typeUtil";
+import dateUtil, { DateFormatType } from "../global/utils/dateUtil";
 
 const AdminUserChart = () => {
   const [data, setData] = useState<UserCountChart[]>([]);
@@ -16,9 +17,17 @@ const AdminUserChart = () => {
 
   const getUserCountList = async () => {
     try {
+      const days = 14;
       const response = await axios({
         method: "GET",
-        url: `${process.env.REACT_APP_SERVER_URL}/api/v1/admin/user/count?date=20240302`,
+        url: `${
+          process.env.REACT_APP_SERVER_URL
+        }/api/v1/admin/user/count?date=${dateUtil.formatDate(
+          new Date(
+            new Date().getTime() - days * 24 * 60 * 60 * 1000
+          ).toString(),
+          DateFormatType.YYYYMMDD
+        )}`,
         headers: {
           Authorization: await axiosUtil.getBearerToken(),
         },

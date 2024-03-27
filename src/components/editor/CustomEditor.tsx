@@ -45,7 +45,12 @@ const CustomEditor = (props: { setData: Function }) => {
 
   return (
     <CKEditor
-      config={{ extraPlugins: [uploadPlugin] }}
+      config={{
+        mediaEmbed: {
+          previewsInData: true,
+        },
+        extraPlugins: [uploadPlugin],
+      }}
       editor={CustomBuildEditor}
       data=""
       onChange={(event: any, editor: any) => {

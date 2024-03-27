@@ -19,6 +19,7 @@ import { ModalContext } from "./context/ModalContext";
 import axiosUtil from "./global/utils/axiosUtil";
 import ProductPostList from "./pages/product/ProductPostList";
 import ProductPostDetail from "./pages/product/ProductPostDetail";
+import Cart from "./pages/cart/Cart";
 
 const App = () => {
   const userCtx = useContext(UserContext);
@@ -36,7 +37,6 @@ const App = () => {
             Authorization: bearerToken,
           },
         });
-        console.log(response);
         userCtx.setUser(response?.data?.userList[0]);
       } catch (error) {
         userCtx.setUser({});
@@ -84,6 +84,7 @@ const App = () => {
               path="/product/detail/*"
               element={<ProductPostDetail />}
             ></Route>
+            <Route path="/cart" element={<Cart />}></Route>
           </Routes>
         </div>
       </BrowserRouter>
